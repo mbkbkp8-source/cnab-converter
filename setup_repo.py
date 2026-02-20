@@ -1,0 +1,84 @@
+"""
+Script para criar estrutura completa do repositório
+Execute: python setup_repo.py
+"""
+import os
+
+# Estrutura de arquivos
+ARQUIVOS = {
+    "cnab_converter/__init__.py": """\"\"\"
+CNAB Converter - Conversão de CNAB 240 Banco do Brasil para Banco Inter
+Suporte a transferências via Pix com todos os tipos de chaves
+\"\"\"
+
+__version__ = "1.0.0"
+__author__ = "CNAB Converter Team"
+""",
+    
+    "tests/__init__.py": "# Arquivo vazio para marcar como pacote Python\n",
+    
+    ".gitignore": """# Arquivos de Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Ambientes virtuais
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Testes
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Arquivos gerados
+*.REM
+*.RET
+relatorio*
+teste_cnab.REM
+""",
+    
+    "requirements.txt": """# Dependências do projeto
+# Este projeto não possui dependências externas obrigatórias
+# Utiliza apenas bibliotecas padrão do Python
+
+# Para testes (opcional):
+# pytest>=7.0
+# pytest-cov>=4.0
+""",
+}
+
+def criar_estrutura():
+    """Cria estrutura de pastas e arquivos básicos"""
+    print("Criando estrutura do repositório...")
+    
+    # Criar pastas
+    os.makedirs("cnab_converter", exist_ok=True)
+    os.makedirs("tests", exist_ok=True)
+    
+    # Criar arquivos
+    for caminho, conteudo in ARQUIVOS.items():
+        os.makedirs(os.path.dirname(caminho), exist_ok=True)
+        
+        with open(caminho, 'w', encoding='utf-8') as f:
+            f.write(conteudo)
+        
+        print(f"✅ Criado: {caminho}")
+    
+    print("\n✅ Estrutura criada com sucesso!")
+    print("\nPróximos passos:")
+    print("1. git add .")
+    print("2. git commit -m 'Initial commit: estrutura base'")
+    print("3. git push -u origin main")
+
+if __name__ == "__main__":
+    criar_estrutura()
